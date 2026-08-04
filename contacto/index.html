@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — LEXSURE</title>
+<meta name="description" content="Escribinos como broker, productor o asegurado. Lexsure, estudio jurídico especializado en derecho del seguro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/img/logo-ls-icon.png" alt="Lexsure" class="logo-mark-img">
+      <span class="logo-text">
+        <span class="name">LEXSURE</span><br>
+        <span class="sub">Derecho &amp; Seguros</span>
+      </span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/nosotros/">Quiénes somos</a></li>
+        <li><a href="/servicios/">Servicios</a></li>
+        <li><a href="/alianza/">Modelo de alianza</a></li>
+        <li><a href="/contacto/">Contacto</a></li>
+        <li class="nav-cta"><a href="/contacto/" class="btn btn-outline-navy">Contactar</a></li>
+      </ul>
+    </nav>
+    <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="/nosotros/">Quiénes somos</a>
+  <a href="/servicios/">Servicios</a>
+  <a href="/alianza/">Modelo de alianza</a>
+  <a href="/contacto/">Contacto</a>
+  <a href="/contacto/" class="btn btn-gold">Contactar</a>
+</nav>
+
+<section class="page-header">
+  <div class="wrap">
+    <span class="eyebrow">Escribinos</span>
+    <h1>Contacto</h1>
+    <p>Sea usted broker, productor o asegurado, cuéntenos su consulta y le respondemos a la brevedad.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contact-layout">
+      <form class="contact-form" id="contactForm" action="#" method="POST" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre y apellido <span class="required">*</span></label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="rol">Consulta como <span class="required">*</span></label>
+            <select id="rol" name="rol" required>
+              <option value="" selected disabled>Seleccionar…</option>
+              <option value="broker-productor">Broker / Productor</option>
+              <option value="asegurado">Asegurado / Cliente final</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje <span class="required">*</span></label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-gold">Enviar consulta</button>
+        </div>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+
+      <div class="contact-info">
+        <div class="divider"></div>
+        <h3>Email</h3>
+        <p><a href="mailto:admin@lexsure.com.ar">admin@lexsure.com.ar</a></p>
+        <h3>Estudio</h3>
+        <p>Lexsure Abogados</p>
+        <h3>Ubicación</h3>
+        <p>Buenos Aires, Argentina</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-logo">
+          <img src="/img/logo-footer-white.png" alt="Lexsure — Derecho &amp; Seguros" class="foot-logo-img">
+        </div>
+        <p style="font-size:13px;max-width:32ch;">Su aliado legal en seguros. Trabajamos junto a brokers y productores.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="/nosotros/">Quiénes somos</a></li>
+          <li><a href="/servicios/">Servicios</a></li>
+          <li><a href="/alianza/">Modelo de alianza</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/">Reclamos administrativos</a></li>
+          <li><a href="/servicios/">Reclamos judiciales</a></li>
+          <li><a href="/servicios/">Asesoría en seguros</a></li>
+          <li><a href="/servicios/">Estrategia legal</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="mailto:admin@lexsure.com.ar">admin@lexsure.com.ar</a></li>
+          <li>Lexsure Abogados</li>
+          <li>Buenos Aires, Argentina</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Lexsure Abogados. Todos los derechos reservados.</span>
+      <span>Diseño de marca aplicado según Guía de Identidad Visual 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

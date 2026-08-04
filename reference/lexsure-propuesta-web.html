@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEXSURE — Propuesta de sitio web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2841;
+    --navy-print:#142134;
+    --black:#010101;
+    --gold:#cda26a;
+    --gold-deep:#977b51;
+    --cream:#f6f3ee;
+    --white:#ffffff;
+    --gray:#777777;
+    --line:#e4ddd0;
+    --maxw:1180px;
+    --header-h:69px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Titillium Web', sans-serif;
+    font-weight:300;
+    color:var(--navy);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.menu-open{overflow:hidden;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+  .eyebrow{
+    font-style:italic;
+    font-weight:300;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    font-size:13px;
+    display:block;
+    margin-bottom:14px;
+  }
+  h1,h2,h3{
+    text-transform:uppercase;
+    font-weight:600;
+    letter-spacing:.02em;
+    text-align:left;
+  }
+  p{text-align:left;}
+  section[id]{scroll-margin-top:var(--header-h);}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    border:1px solid transparent;
+    transition:all .25s ease;
+    cursor:pointer;
+    background:none;
+  }
+  .btn-gold{background:var(--gold); color:var(--navy);}
+  .btn-gold:hover{background:var(--gold-deep); color:var(--white);}
+  .btn-outline{border-color:rgba(255,255,255,.5); color:var(--white);}
+  .btn-outline:hover{background:rgba(255,255,255,.1); border-color:var(--white);}
+  .btn-outline-navy{border-color:var(--navy); color:var(--navy);}
+  .btn-outline-navy:hover{background:var(--navy); color:var(--white);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    height:var(--header-h);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 40px; max-width:var(--maxw); margin:0 auto; height:100%;
+  }
+  .logo{display:flex; align-items:center; gap:12px;}
+  .logo-mark{
+    width:36px;height:36px;position:relative;
+    font-family:'Titillium Web';font-weight:700;font-size:22px;
+    display:flex;
+  }
+  .logo-mark .l{color:var(--navy);}
+  .logo-mark .s{color:var(--gold);margin-left:-6px;}
+  .logo-text{line-height:1.1;}
+  .logo-text .name{font-weight:600;letter-spacing:.18em;font-size:16px;color:var(--navy);}
+  .logo-text .sub{font-size:9px;letter-spacing:.18em;color:var(--gold-deep);text-transform:uppercase;}
+  nav ul{display:flex;list-style:none;gap:36px;align-items:center;}
+  nav a{
+    font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    font-weight:400;color:var(--navy);position:relative;padding-bottom:4px;
+  }
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--gold);transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-cta{margin-left:12px;}
+
+  /* burger / mobile menu */
+  .burger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    cursor:pointer; width:24px; height:24px; z-index:210; background:none; border:none; padding:0;
+  }
+  .burger span{
+    width:24px;height:2px;background:var(--navy); transition:transform .25s ease, opacity .2s ease;
+  }
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-menu{
+    position:fixed; inset:var(--header-h) 0 0 0; z-index:190;
+    background:var(--white);
+    transform:translateY(-8px); opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    display:flex; flex-direction:column; padding:36px 32px;
+  }
+  .mobile-menu.open{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .mobile-menu a{
+    font-size:20px; text-transform:uppercase; letter-spacing:.04em; font-weight:400;
+    padding:16px 0; border-bottom:1px solid var(--line); color:var(--navy);
+  }
+  .mobile-menu .btn{margin-top:28px; justify-content:center;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; margin-top:var(--header-h);
+    min-height:92vh; display:flex;
+    background:var(--navy);
+    overflow:hidden;
+  }
+  .hero-copy{
+    width:56%; display:flex; flex-direction:column; justify-content:center;
+    padding:80px 6vw; position:relative; z-index:2;
+  }
+  .hero-copy h1{
+    color:var(--white); font-size:clamp(34px,4vw,54px);
+    line-height:1.14; font-weight:600; max-width:13ch;
+  }
+  .hero-copy h1 em{
+    font-style:italic; color:var(--gold); font-weight:300;
+  }
+  .hero-copy p{
+    color:#c9d2df; max-width:46ch; margin:26px 0 36px; font-size:16px; font-weight:300;
+  }
+  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+  .hero-visual{
+    width:44%; position:relative; overflow:hidden;
+    background:linear-gradient(160deg, var(--gold) 0%, var(--gold-deep) 100%);
+    clip-path:polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .hero-visual::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(115deg, rgba(255,255,255,.08) 0 2px, transparent 2px 46px);
+  }
+  .photo-ph{
+    position:absolute; inset:0; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  }
+  .photo-ph svg{width:34px;height:34px;opacity:.9;}
+  .photo-ph span{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(255,255,255,.9); font-weight:400; text-align:center; max-width:16ch;
+  }
+  .hero-badge{
+    position:absolute; left:9%; bottom:12%; z-index:2;
+    background:var(--navy); color:var(--white);
+    padding:22px 26px; max-width:250px;
+    border-left:3px solid var(--gold);
+  }
+  .hero-badge span{
+    font-size:13px;letter-spacing:.03em;color:var(--white);font-style:italic;font-weight:300;line-height:1.4;
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:110px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:40px; margin-bottom:64px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(26px,2.6vw,36px); max-width:16ch;}
+  .section-head .desc{max-width:38ch; color:var(--gray); font-size:15px;}
+  .divider{
+    width:64px; height:2px; background:var(--gold); margin-bottom:22px;
+    position:relative;
+  }
+  .divider::after{
+    content:'';position:absolute;left:70px;top:0;width:14px;height:2px;
+    background:var(--navy);
+  }
+  .process .divider::after{background:var(--white);}
+
+  /* ---------- SERVICIOS ---------- */
+  .areas{background:var(--cream);}
+  .areas-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
+    background:var(--line);
+  }
+  .area-card{
+    background:var(--white); padding:44px 28px; position:relative;
+    clip-path:polygon(0 22px, 22px 0, 100% 0, 100% 100%, 0 100%);
+    transition:background .25s ease;
+  }
+  .area-card:hover{background:var(--navy);}
+  .area-card:hover h3, .area-card:hover p{color:var(--white);}
+  .area-card:hover .area-num{color:var(--gold);}
+  .area-num{font-size:12px;color:var(--gold-deep);letter-spacing:.1em;font-weight:600;}
+  .area-card h3{font-size:17px; margin:22px 0 12px; letter-spacing:.01em;}
+  .area-card p{font-size:14px;color:var(--gray);}
+
+  /* ---------- ABOUT / QUIENES SOMOS ---------- */
+  .about{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;}
+  .about-visual{
+    aspect-ratio:4/5; position:relative; overflow:hidden;
+    background:linear-gradient(155deg,var(--navy) 0%, var(--navy-print) 100%);
+    clip-path:polygon(0 0, 100% 0, 100% 84%, 84% 100%, 0 100%);
+  }
+  .about-visual::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(115deg, rgba(205,162,106,.08) 0 2px, transparent 2px 46px);
+  }
+  .about-visual::after{
+    content:'';position:absolute;inset:24px;
+    border:1px solid rgba(205,162,106,.5);
+    clip-path:polygon(0 0, 100% 0, 100% 84%, 84% 100%, 0 100%);
+  }
+  .about-copy p{color:var(--gray); font-size:15.5px; margin-bottom:18px; max-width:50ch;}
+
+  /* ---------- LO QUE NOS DISTINGUE ---------- */
+  .distingue-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:36px 60px;
+  }
+  .distingue-item{border-left:2px solid var(--gold); padding-left:24px;}
+  .distingue-item h3{font-size:16px; margin-bottom:8px;}
+  .distingue-item p{font-size:14.5px; color:var(--gray);}
+
+  /* ---------- MODELO DE ALIANZA / PROCESS ---------- */
+  .process{background:var(--navy); color:var(--white);}
+  .process .section-head h2, .process .section-head .desc{color:var(--white);}
+  .process .section-head .desc{color:#aebbcc;}
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:36px;}
+  .steps-3{grid-template-columns:repeat(3,1fr);}
+  .step{border-top:2px solid var(--gold); padding-top:22px;}
+  .step .step-num{font-size:13px; color:var(--gold); font-weight:600; letter-spacing:.1em;}
+  .step h3{font-size:17px; margin:14px 0 10px; color:var(--white);}
+  .step p{font-size:14px; color:#aebbcc;}
+
+  /* ---------- TESTIMONIAL / PULL QUOTE ---------- */
+  .testimonial-section{background:var(--cream); padding-bottom:130px;}
+  .quote-block{
+    display:grid; grid-template-columns:auto 1.6fr; gap:36px; align-items:start;
+  }
+  .quote-mark{font-family:Georgia,serif; font-size:80px; color:var(--gold); line-height:1; margin-top:-14px;}
+  blockquote{
+    font-size:clamp(20px,2vw,26px); font-weight:300; font-style:italic; color:var(--navy);
+    max-width:32ch;
+  }
+  .quote-attr{margin-top:22px; font-style:normal; font-size:13px; letter-spacing:.06em; color:var(--gray); text-transform:uppercase;}
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    position:relative; background:var(--gold); padding:0;
+    display:flex; min-height:280px;
+  }
+  .cta-band .cta-navy{
+    width:50%; background:var(--navy); color:var(--white);
+    display:flex; flex-direction:column; justify-content:center; padding:56px 6vw;
+    clip-path:polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  }
+  .cta-band .cta-navy h2{font-size:clamp(24px,2.8vw,34px); max-width:14ch; color:var(--white);}
+  .cta-band .cta-navy p{color:#c9d2df; margin:16px 0 26px; max-width:36ch; font-size:15px;}
+  .cta-band .cta-empty{
+    width:50%; position:relative; overflow:hidden;
+    background:linear-gradient(200deg, var(--navy-print) 0%, var(--navy) 60%, var(--gold-deep) 130%);
+  }
+  .cta-band .cta-empty::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(115deg, rgba(205,162,106,.1) 0 2px, transparent 2px 46px);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--black); color:#9aa1ad; padding:70px 0 30px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:50px; border-bottom:1px solid #232323;}
+  .foot-col h4{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; font-weight:600;}
+  .foot-col ul{list-style:none;}
+  .foot-col li{margin-bottom:12px; font-size:14px;}
+  .foot-col a:hover{color:var(--gold);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:26px;
+    font-size:12px; flex-wrap:wrap; gap:10px;
+  }
+  .foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav ul{display:none;}
+    .burger{display:flex;}
+    .hero{flex-direction:column; min-height:auto;}
+    .hero-copy, .hero-visual{width:100%;}
+    .hero-visual{clip-path:none; min-height:280px;}
+    .hero-badge{position:static; margin:24px 6vw 40px; max-width:none;}
+    .areas-grid{grid-template-columns:repeat(2,1fr);}
+    .about{grid-template-columns:1fr; gap:40px;}
+    .distingue-grid{grid-template-columns:1fr; gap:26px;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .steps-3{grid-template-columns:1fr;}
+    .quote-block{grid-template-columns:1fr; gap:8px;}
+    .quote-mark{margin-top:0;}
+    .testimonial-section{padding-bottom:70px;}
+    .cta-band{flex-direction:column;}
+    .cta-band .cta-navy{width:100%; clip-path:none; padding:60px 6vw;}
+    .cta-band .cta-empty{width:100%; min-height:220px;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .wrap{padding:0 24px;}
+    section{padding:70px 0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"><span class="l">L</span><span class="s">S</span></span>
+      <span class="logo-text">
+        <span class="name">LEXSURE</span><br>
+        <span class="sub">Derecho &amp; Seguros</span>
+      </span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#nosotros">Quiénes somos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#alianza">Modelo de alianza</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="nav-cta"><a href="#contacto" class="btn btn-outline-navy">Contactar</a></li>
+      </ul>
+    </nav>
+    <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#nosotros">Quiénes somos</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#alianza">Modelo de alianza</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#contacto" class="btn btn-gold">Contactar</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Estudio jurídico especializado en derecho del seguro</span>
+    <h1>Su aliado legal <em>en seguros</em></h1>
+    <p>Nos asociamos con brokers y productores para ofrecer a sus clientes un servicio legal de calidad: expeditivo, accesible y sin costo adicional.</p>
+    <div class="hero-actions">
+      <a href="#alianza" class="btn btn-gold">Conocer el modelo de alianza</a>
+      <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="photo-ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4"><rect x="2" y="6" width="20" height="14" rx="1.5"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2.5h5L16 6"/></svg>
+      <span>Foto: gestión de siniestros</span>
+    </div>
+    <div class="hero-badge">
+      <span>“Actuamos como el brazo legal de cada productor.”</span>
+    </div>
+  </div>
+</section>
+
+<section class="areas" id="servicios">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="divider"></div>
+        <h2>Nuestros servicios</h2>
+      </div>
+      <p class="desc">¿Qué gestionamos por usted?</p>
+    </div>
+  </div>
+  <div class="areas-grid">
+    <div class="area-card">
+      <span class="area-num">01</span>
+      <h3>Reclamos administrativos</h3>
+      <p>Gestión ante aseguradoras y organismos reguladores, con seguimiento permanente.</p>
+    </div>
+    <div class="area-card">
+      <span class="area-num">02</span>
+      <h3>Reclamos judiciales</h3>
+      <p>Desde franquicias automotor hasta siniestros complejos de mayor cuantía.</p>
+    </div>
+    <div class="area-card">
+      <span class="area-num">03</span>
+      <h3>Asesoría en seguros</h3>
+      <p>Consultoría legal integral en toda materia vinculada al derecho del seguro.</p>
+    </div>
+    <div class="area-card">
+      <span class="area-num">04</span>
+      <h3>Estrategia legal</h3>
+      <p>Diagnóstico rápido de la postura de la compañía y plan de acción inmediato.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="nosotros">
+  <div class="about">
+    <div class="about-visual">
+      <div class="photo-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#cda26a" stroke-width="1.4"><circle cx="9" cy="9" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17.5" cy="10" r="2.4"/><path d="M14.5 20c.2-2.8 1.8-4.6 3-4.6 2.3 0 3.5 2 3.5 4.6"/></svg>
+        <span>Foto: equipo Lexsure</span>
+      </div>
+    </div>
+    <div class="about-copy">
+      <div class="divider"></div>
+      <span class="eyebrow">Quiénes somos</span>
+      <h2>Un estudio jurídico en el corazón del seguro</h2>
+      <p>Lexsure es un estudio jurídico especializado en derecho del seguro. Nos asociamos con brokers y productores para ofrecer a sus clientes un servicio legal de calidad: expeditivo, accesible y sin costo adicional.</p>
+      <p>Actuamos como el brazo legal de cada productor, gestionando reclamos con la misma dedicación y urgencia que el negocio de seguros demanda.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <div>
+      <div class="divider"></div>
+      <h2>Lo que nos distingue</h2>
+    </div>
+  </div>
+  <div class="distingue-grid">
+    <div class="distingue-item">
+      <h3>Red de contactos directos</h3>
+      <p>Acceso inmediato a estudios liquidadores y aseguradoras. Conocemos la postura de la compañía rápidamente para definir la estrategia óptima.</p>
+    </div>
+    <div class="distingue-item">
+      <h3>Sin honorarios al cliente</h3>
+      <p>El cliente final no abona honorarios, salvo indicación expresa del broker o productor. Una alianza que fortalece la relación con el asegurado.</p>
+    </div>
+    <div class="distingue-item">
+      <h3>Respuesta inmediata</h3>
+      <p>Asesoramiento en toda materia de seguros con responsabilidad constante. El tiempo es crítico en los siniestros.</p>
+    </div>
+    <div class="distingue-item">
+      <h3>Servicio de calidad</h3>
+      <p>Seguimiento online de casos. Cada productor puede visualizar el estado de sus reclamos de forma ordenada y transparente.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="alianza">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="divider"></div>
+        <h2>Modelo de alianza</h2>
+      </div>
+      <p class="desc">¿Cómo trabajamos juntos?</p>
+    </div>
+    <div class="steps steps-3">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Broker / Productor</h3>
+        <p>Recibe la consulta o siniestro del cliente.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Lexsure actúa</h3>
+        <p>Evalúa, asesora y gestiona el reclamo.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Resultado para el cliente</h3>
+        <p>Resolución ágil, sin costo legal adicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial-section">
+  <div class="wrap">
+    <div class="quote-block">
+      <div class="quote-mark">&ldquo;</div>
+      <div>
+        <blockquote>Nos aliamos a su negocio, brindando un respaldo legal que fortalece su propuesta de valor.</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contacto">
+  <div class="cta-navy">
+    <div class="divider"></div>
+    <h2>Sumemos su cartera a nuestra alianza</h2>
+    <p>Sea usted broker, productor o asegurado, cuenta con un respaldo legal ágil y sin costo adicional.</p>
+    <div>
+      <a href="mailto:admin@lexsure.com.ar" class="btn btn-gold">Escribir a Lexsure</a>
+    </div>
+  </div>
+  <div class="cta-empty">
+    <div class="photo-ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4"><rect x="2" y="6" width="20" height="14" rx="1.5"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2.5h5L16 6"/></svg>
+      <span>Foto: reunión con productor</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-logo">
+          <span class="logo-mark"><span class="l" style="color:#fff">L</span><span class="s">S</span></span>
+          <span class="logo-text"><span class="name" style="color:#fff">LEXSURE</span></span>
+        </div>
+        <p style="font-size:13px;max-width:32ch;">Su aliado legal en seguros. Trabajamos junto a brokers y productores.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#nosotros">Quiénes somos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#alianza">Modelo de alianza</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#">Reclamos administrativos</a></li>
+          <li><a href="#">Reclamos judiciales</a></li>
+          <li><a href="#">Asesoría en seguros</a></li>
+          <li><a href="#">Estrategia legal</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>admin@lexsure.com.ar</li>
+          <li>Lexsure Abogados</li>
+          <li>Buenos Aires, Argentina</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Lexsure Abogados. Todos los derechos reservados.</span>
+      <span>Diseño de marca aplicado según Guía de Identidad Visual 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.querySelector('.burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMenu(){
+    burger.setAttribute('aria-expanded','false');
+    mobileMenu.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+  function openMenu(){
+    burger.setAttribute('aria-expanded','true');
+    mobileMenu.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+  burger.addEventListener('click', () => {
+    const isOpen = burger.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+
+</body>
+</html>
