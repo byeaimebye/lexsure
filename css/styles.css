@@ -290,6 +290,40 @@ section{padding:110px 0;}
 }
 .about-copy p{color:var(--gray); font-size:15.5px; margin-bottom:18px; max-width:50ch;}
 
+/* ---------- EQUIPO (quiénes somos) ---------- */
+.equipo{background:var(--cream);}
+.equipo-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:60px;}
+.perfil-foto{
+  aspect-ratio:1/1; position:relative; overflow:hidden; margin-bottom:32px;
+  background-color:var(--navy);
+  background-image:
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%),
+    linear-gradient(155deg, var(--navy) 0%, var(--navy-print) 100%);
+  background-repeat:no-repeat; background-position:top left;
+  background-size:22px 22px, 100% 100%;
+  clip-path:polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%);
+}
+.perfil-foto::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:repeating-linear-gradient(115deg, rgba(205,162,106,.08) 0 2px, transparent 2px 46px);
+}
+.perfil-foto img{
+  position:absolute; left:50%; bottom:0; z-index:2;
+  width:100%; height:auto; transform:translateX(-50%);
+}
+/* Recorte con borde inferior curvo: se amplía y se esconde la curva bajo el panel. */
+.perfil-foto-recorte img{width:110%; bottom:-16%;}
+/* Texto en navy: el dorado oscuro y el gris no llegan a AA sobre crema. */
+.perfil-copy .eyebrow{color:var(--navy); margin-bottom:6px;}
+.perfil-copy h3{font-size:21px; margin-bottom:16px;}
+.perfil-copy p{color:var(--navy); font-size:15.5px; max-width:50ch;}
+.perfil-mail{
+  display:inline-block; margin-top:18px; font-size:14px; letter-spacing:.02em; color:var(--navy);
+  border-bottom:1px solid var(--gold); padding-bottom:2px; transition:border-color .2s ease;
+}
+.perfil-mail:hover{border-color:var(--navy);}
+.perfil-mail:focus-visible{outline:2px solid var(--gold-deep); outline-offset:4px;}
+
 /* ---------- LO QUE NOS DISTINGUE ---------- */
 .distingue-grid{
   display:grid; grid-template-columns:repeat(2,1fr); gap:36px 60px;
@@ -410,6 +444,8 @@ footer{background:var(--black); color:#9aa1ad; padding:70px 0 30px;}
   .service-detail-item{grid-template-columns:1fr; gap:16px; padding:36px 28px;}
   .service-detail-num{font-size:34px;}
   .about{grid-template-columns:1fr; gap:40px;}
+  .equipo-grid{grid-template-columns:1fr; gap:56px;}
+  .perfil-foto{max-width:440px;}
   .distingue-grid{grid-template-columns:1fr; gap:26px;}
   .steps{grid-template-columns:repeat(2,1fr);}
   .steps-3{grid-template-columns:1fr;}
